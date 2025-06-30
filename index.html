@@ -1,13 +1,263 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite + React</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
-  </body>
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>電子マンガリーダー</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-width: 320px;
+            min-height: 100vh;
+            background-color: #1a1a1a;
+            color: white;
+            overflow: hidden;
+            font-family: Arial, sans-serif;
+        }
+
+        .manga-reader {
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            background-color: #1a1a1a;
+            color: white;
+        }
+
+        .page-container {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            overflow: hidden;
+        }
+
+        .manga-page {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+            transition: transform 0.3s ease;
+            user-select: none;
+            -webkit-user-drag: none;
+            -webkit-touch-callout: none;
+        }
+
+        .manga-page:hover {
+            transform: scale(1.02);
+        }
+
+        .navigation-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 40px;
+            background-color: #2a2a2a;
+            border-top: 1px solid #444;
+        }
+
+        .nav-btn {
+            background-color: #4a4a4a;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            min-width: 80px;
+            outline: none;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .nav-btn:hover:not(:disabled) {
+            background-color: #6a6a6a;
+            transform: translateY(-2px);
+        }
+
+        .nav-btn:active:not(:disabled) {
+            transform: translateY(0);
+        }
+
+        .nav-btn:disabled {
+            background-color: #333;
+            color: #666;
+            cursor: not-allowed;
+        }
+
+        .page-info {
+            font-size: 18px;
+            font-weight: bold;
+            color: #ccc;
+            min-width: 80px;
+            text-align: center;
+        }
+
+        @media (max-width: 768px) {
+            .navigation-controls {
+                padding: 15px 20px;
+            }
+            
+            .nav-btn {
+                padding: 10px 16px;
+                font-size: 14px;
+                min-width: 60px;
+            }
+            
+            .page-info {
+                font-size: 16px;
+                min-width: 60px;
+            }
+            
+            .page-container {
+                padding: 10px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .navigation-controls {
+                padding: 10px 15px;
+            }
+            
+            .nav-btn {
+                padding: 8px 12px;
+                font-size: 12px;
+                min-width: 50px;
+            }
+            
+            .page-info {
+                font-size: 14px;
+                min-width: 50px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="manga-reader" id="mangaReader">
+        <div class="page-container">
+            <img id="mangaPage" alt="Page" class="manga-page">
+        </div>
+        
+        <div class="navigation-controls">
+            <button class="nav-btn prev-btn" id="prevBtn">← 前</button>
+            <span class="page-info" id="pageInfo">1 / 8</span>
+            <button class="nav-btn next-btn" id="nextBtn">次 →</button>
+        </div>
+    </div>
+
+    <script>
+        let currentPage = 0;
+        const totalPages = 8;
+
+        const mangaPageImg = document.getElementById('mangaPage');
+        const pageInfo = document.getElementById('pageInfo');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const mangaReader = document.getElementById('mangaReader');
+
+        function updatePage() {
+            // 実際のJPG画像を使用
+            mangaPageImg.src = `pages/${currentPage + 1}.jpg`;
+            mangaPageImg.onerror = function() {
+                // 画像が見つからない場合の代替表示
+                this.src = `data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="400" height="600"><rect width="100%" height="100%" fill="%23333"/><text x="50%" y="50%" fill="white" text-anchor="middle" dy=".3em">Page ${currentPage + 1}</text></svg>`;
+            };
+            
+            pageInfo.textContent = `${currentPage + 1} / ${totalPages}`;
+            
+            prevBtn.disabled = currentPage === 0;
+            nextBtn.disabled = currentPage === totalPages - 1;
+        }
+
+        function nextPage() {
+            if (currentPage < totalPages - 1) {
+                currentPage++;
+                updatePage();
+            }
+        }
+
+        function prevPage() {
+            if (currentPage > 0) {
+                currentPage--;
+                updatePage();
+            }
+        }
+
+        // ボタンイベント
+        prevBtn.addEventListener('click', prevPage);
+        nextBtn.addEventListener('click', nextPage);
+
+        // スワイプイベント（簡易実装）
+        let startX = 0;
+        let startY = 0;
+
+        mangaReader.addEventListener('touchstart', (e) => {
+            startX = e.touches[0].clientX;
+            startY = e.touches[0].clientY;
+        });
+
+        mangaReader.addEventListener('touchend', (e) => {
+            const endX = e.changedTouches[0].clientX;
+            const endY = e.changedTouches[0].clientY;
+            const diffX = startX - endX;
+            const diffY = startY - endY;
+
+            if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 50) {
+                if (diffX > 0) {
+                    nextPage(); // 左スワイプ
+                } else {
+                    prevPage(); // 右スワイプ
+                }
+            }
+        });
+
+        // マウスドラッグ（PC用）
+        let isDragging = false;
+        let mouseStartX = 0;
+
+        mangaReader.addEventListener('mousedown', (e) => {
+            isDragging = true;
+            mouseStartX = e.clientX;
+        });
+
+        mangaReader.addEventListener('mousemove', (e) => {
+            if (!isDragging) return;
+            e.preventDefault();
+        });
+
+        mangaReader.addEventListener('mouseup', (e) => {
+            if (!isDragging) return;
+            isDragging = false;
+            
+            const diffX = mouseStartX - e.clientX;
+            if (Math.abs(diffX) > 50) {
+                if (diffX > 0) {
+                    nextPage();
+                } else {
+                    prevPage();
+                }
+            }
+        });
+
+        // キーボード操作
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowLeft') {
+                prevPage();
+            } else if (e.key === 'ArrowRight') {
+                nextPage();
+            }
+        });
+
+        // 初期化
+        updatePage();
+    </script>
+</body>
 </html>
