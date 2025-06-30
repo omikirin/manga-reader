@@ -165,7 +165,7 @@
 
         function updatePage() {
             // 実際のJPG画像を使用
-            mangaPageImg.src = `./public/pages/${currentPage + 1}.jpg`;
+            mangaPageImg.src = `pages/${currentPage + 1}.jpg`;
             mangaPageImg.onerror = function() {
                 // 画像が見つからない場合の代替表示
                 this.src = `data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="400" height="600"><rect width="100%" height="100%" fill="%23333"/><text x="50%" y="50%" fill="white" text-anchor="middle" dy=".3em">Page ${currentPage + 1}</text></svg>`;
