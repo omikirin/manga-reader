@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="600" viewBox="0 0 400 600">
+  <rect width="100%" height="100%" fill="#2a2a2a"/>
+  <rect x="20" y="20" width="360" height="560" fill="#1a1a1a" stroke="#444" stroke-width="2"/>
+  
+  <!-- エンディング風レイアウト -->
+  <text x="200" y="100" text-anchor="middle" fill="white" font-size="24" font-weight="bold">完成！</text>
+  
+  <!-- 大きな完成イラスト -->
+  <circle cx="200" cy="250" r="80" fill="#6a6a6a"/>
+  <circle cx="170" cy="220" r="10" fill="white"/>
+  <circle cx="230" cy="220" r="10" fill="white"/>
+  <circle cx="165" cy="218" r="4" fill="black"/>
+  <circle cx="235" cy="218" r="4" fill="black"/>
+  <path d="M 160 270 Q 200 300 240 270" stroke="white" stroke-width="4" fill="none"/>
+  
+  <!-- 手を上げているポーズ -->
+  <ellipse cx="120" cy="200" rx="15" ry="40" fill="#6a6a6a" transform="rotate(-30 120 200)"/>
+  <ellipse cx="280" cy="200" rx="15" ry="40" fill="#6a6a6a" transform="rotate(30 280 200)"/>
+  
+  <!-- 星やエフェクト -->
+  <polygon points="100,150 105,165 120,165 108,175 113,190 100,180 87,190 92,175 80,165 95,165" fill="#ffd700"/>
+  <polygon points="300,150 305,165 320,165 308,175 313,190 300,180 287,190 292,175 280,165 295,165" fill="#ffd700"/>
+  <polygon points="150,120 153,128 161,128 155,133 158,141 150,136 142,141 145,133 139,128 147,128" fill="#ffd700"/>
+  <polygon points="250,120 253,128 261,128 255,133 258,141 250,136 242,141 245,133 239,128 247,128" fill="#ffd700"/>
+  
+  <!-- クレジット風 -->
+  <text x="200" y="380" text-anchor="middle" fill="#ccc" font-size="16">ミニマル電子マンガリーダー</text>
+  <text x="200" y="410" text-anchor="middle" fill="#888" font-size="12">React + Vite + react-swipeable</text>
+  
+  <text x="200" y="450" text-anchor="middle" fill="white" font-size="14">シンプル・高速・使いやすい</text>
+  
+  <!-- おしまい -->
+  <ellipse cx="200" cy="500" rx="60" ry="20" fill="white" stroke="#333" stroke-width="2"/>
+  <text x="200" y="505" text-anchor="middle" fill="black" font-size="14" font-weight="bold">おしまい</text>
+  
+  <text x="200" y="550" text-anchor="middle" fill="#666" font-size="12">Page 5 / 5</text>
+</svg>

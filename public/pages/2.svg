@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="600" viewBox="0 0 400 600">
+  <rect width="100%" height="100%" fill="#2a2a2a"/>
+  <rect x="20" y="20" width="360" height="560" fill="#1a1a1a" stroke="#444" stroke-width="2"/>
+  
+  <!-- コマ割り風のレイアウト -->
+  <rect x="40" y="50" width="320" height="120" fill="#333" stroke="#666" stroke-width="1"/>
+  <rect x="40" y="190" width="150" height="180" fill="#333" stroke="#666" stroke-width="1"/>
+  <rect x="210" y="190" width="150" height="180" fill="#333" stroke="#666" stroke-width="1"/>
+  <rect x="40" y="390" width="320" height="120" fill="#333" stroke="#666" stroke-width="1"/>
+  
+  <!-- キャラクター -->
+  <circle cx="120" cy="280" r="40" fill="#6a6a6a"/>
+  <circle cx="110" cy="265" r="5" fill="white"/>
+  <circle cx="130" cy="265" r="5" fill="white"/>
+  <ellipse cx="120" cy="290" rx="10" ry="5" fill="white"/>
+  
+  <circle cx="280" cy="280" r="40" fill="#8a8a8a"/>
+  <circle cx="270" cy="265" r="5" fill="white"/>
+  <circle cx="290" cy="265" r="5" fill="white"/>
+  <ellipse cx="280" cy="290" rx="10" ry="5" fill="white"/>
+  
+  <!-- テキスト -->
+  <text x="200" y="110" text-anchor="middle" fill="white" font-size="16">マンガリーダーを</text>
+  <text x="200" y="130" text-anchor="middle" fill="white" font-size="16">作っています</text>
+  
+  <text x="115" y="340" text-anchor="middle" fill="#ccc" font-size="10">左キャラ</text>
+  <text x="280" y="340" text-anchor="middle" fill="#ccc" font-size="10">右キャラ</text>
+  
+  <text x="200" y="440" text-anchor="middle" fill="white" font-size="14">シンプルで使いやすい</text>
+  <text x="200" y="460" text-anchor="middle" fill="white" font-size="14">ビューアーです</text>
+  
+  <text x="200" y="550" text-anchor="middle" fill="#666" font-size="12">Page 2 / 5</text>
+</svg>
