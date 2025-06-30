@@ -29,7 +29,7 @@ function App() {
     <div className="manga-reader" {...handlers}>
       <div className="page-container">
         <img 
-          src={`/pages/${currentPage}.svg`} 
+          src={`/pages/${currentPage}.png`} 
           alt={`Page ${currentPage}`}
           className="manga-page"
           onError={(e) => {
