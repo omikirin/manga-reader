@@ -4,7 +4,7 @@ import './App.css'
 
 function App() {
   const [currentPage, setCurrentPage] = useState(1)
-  const totalPages = 5
+  const totalPages = 8
   
   const nextPage = () => {
     if (currentPage < totalPages) {
@@ -29,7 +29,7 @@ function App() {
     <div className="manga-reader" {...handlers}>
       <div className="page-container">
         <img 
-          src={`/pages/${currentPage}.svg`} 
+          src={`/pages/${currentPage}.jpg`} 
           alt={`Page ${currentPage}`}
           className="manga-page"
           onError={(e) => {

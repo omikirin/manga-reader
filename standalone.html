@@ -148,166 +148,14 @@
         
         <div class="navigation-controls">
             <button class="nav-btn prev-btn" id="prevBtn">← 前</button>
-            <span class="page-info" id="pageInfo">1 / 5</span>
+            <span class="page-info" id="pageInfo">1 / 8</span>
             <button class="nav-btn next-btn" id="nextBtn">次 →</button>
         </div>
     </div>
 
     <script>
-        // マンガページのSVGデータ
-        const pages = [
-            // Page 1
-            `<svg xmlns="http://www.w3.org/2000/svg" width="400" height="600" viewBox="0 0 400 600">
-              <rect width="100%" height="100%" fill="#2a2a2a"/>
-              <rect x="20" y="20" width="360" height="560" fill="#1a1a1a" stroke="#444" stroke-width="2"/>
-              <text x="200" y="100" text-anchor="middle" fill="white" font-size="36" font-weight="bold">第1話</text>
-              <text x="200" y="150" text-anchor="middle" fill="#ccc" font-size="18">ミニマル電子マンガリーダー</text>
-              
-              <circle cx="200" cy="300" r="60" fill="#6a6a6a"/>
-              <circle cx="180" cy="280" r="8" fill="white"/>
-              <circle cx="220" cy="280" r="8" fill="white"/>
-              <circle cx="175" cy="278" r="3" fill="black"/>
-              <circle cx="225" cy="278" r="3" fill="black"/>
-              <ellipse cx="200" cy="310" rx="15" ry="8" fill="white"/>
-              
-              <ellipse cx="300" cy="200" rx="80" ry="40" fill="white" stroke="#333" stroke-width="2"/>
-              <polygon points="240,220 220,240 260,230" fill="white" stroke="#333" stroke-width="2"/>
-              <text x="300" y="205" text-anchor="middle" fill="black" font-size="14">こんにちは！</text>
-              
-              <text x="200" y="480" text-anchor="middle" fill="#888" font-size="14">← 左右スワイプまたはボタンでページ移動 →</text>
-              <text x="200" y="520" text-anchor="middle" fill="#666" font-size="12">Page 1 / 5</text>
-            </svg>`,
-            
-            // Page 2
-            `<svg xmlns="http://www.w3.org/2000/svg" width="400" height="600" viewBox="0 0 400 600">
-              <rect width="100%" height="100%" fill="#2a2a2a"/>
-              <rect x="20" y="20" width="360" height="560" fill="#1a1a1a" stroke="#444" stroke-width="2"/>
-              
-              <rect x="40" y="50" width="320" height="120" fill="#333" stroke="#666" stroke-width="1"/>
-              <rect x="40" y="190" width="150" height="180" fill="#333" stroke="#666" stroke-width="1"/>
-              <rect x="210" y="190" width="150" height="180" fill="#333" stroke="#666" stroke-width="1"/>
-              <rect x="40" y="390" width="320" height="120" fill="#333" stroke="#666" stroke-width="1"/>
-              
-              <circle cx="120" cy="280" r="40" fill="#6a6a6a"/>
-              <circle cx="110" cy="265" r="5" fill="white"/>
-              <circle cx="130" cy="265" r="5" fill="white"/>
-              <ellipse cx="120" cy="290" rx="10" ry="5" fill="white"/>
-              
-              <circle cx="280" cy="280" r="40" fill="#8a8a8a"/>
-              <circle cx="270" cy="265" r="5" fill="white"/>
-              <circle cx="290" cy="265" r="5" fill="white"/>
-              <ellipse cx="280" cy="290" rx="10" ry="5" fill="white"/>
-              
-              <text x="200" y="110" text-anchor="middle" fill="white" font-size="16">マンガリーダーを</text>
-              <text x="200" y="130" text-anchor="middle" fill="white" font-size="16">作っています</text>
-              
-              <text x="115" y="340" text-anchor="middle" fill="#ccc" font-size="10">左キャラ</text>
-              <text x="280" y="340" text-anchor="middle" fill="#ccc" font-size="10">右キャラ</text>
-              
-              <text x="200" y="440" text-anchor="middle" fill="white" font-size="14">シンプルで使いやすい</text>
-              <text x="200" y="460" text-anchor="middle" fill="white" font-size="14">ビューアーです</text>
-              
-              <text x="200" y="550" text-anchor="middle" fill="#666" font-size="12">Page 2 / 5</text>
-            </svg>`,
-            
-            // Page 3
-            `<svg xmlns="http://www.w3.org/2000/svg" width="400" height="600" viewBox="0 0 400 600">
-              <rect width="100%" height="100%" fill="#2a2a2a"/>
-              <rect x="20" y="20" width="360" height="560" fill="#1a1a1a" stroke="#444" stroke-width="2"/>
-              
-              <polygon points="50,100 150,80 250,120 350,90 380,200 300,300 100,280 30,180" fill="#444" stroke="#666" stroke-width="2"/>
-              
-              <ellipse cx="200" cy="250" rx="50" ry="30" fill="#6a6a6a" transform="rotate(15 200 250)"/>
-              <circle cx="190" cy="240" r="6" fill="white"/>
-              <circle cx="210" cy="240" r="6" fill="white"/>
-              <ellipse cx="200" cy="260" rx="12" ry="6" fill="white"/>
-              
-              <line x1="100" y1="200" x2="150" y2="180" stroke="#888" stroke-width="3"/>
-              <line x1="250" y1="180" x2="300" y2="200" stroke="#888" stroke-width="3"/>
-              <line x1="120" y1="300" x2="170" y2="280" stroke="#888" stroke-width="3"/>
-              <line x1="230" y1="280" x2="280" y2="300" stroke="#888" stroke-width="3"/>
-              
-              <ellipse cx="150" cy="150" rx="60" ry="30" fill="white" stroke="#333" stroke-width="2"/>
-              <text x="150" y="155" text-anchor="middle" fill="black" font-size="12">スワイプ！</text>
-              
-              <ellipse cx="280" cy="350" rx="70" ry="25" fill="white" stroke="#333" stroke-width="2"/>
-              <text x="280" y="355" text-anchor="middle" fill="black" font-size="11">ボタンも使える</text>
-              
-              <text x="200" y="480" text-anchor="middle" fill="white" font-size="16">アクション満載</text>
-              <text x="200" y="550" text-anchor="middle" fill="#666" font-size="12">Page 3 / 5</text>
-            </svg>`,
-            
-            // Page 4
-            `<svg xmlns="http://www.w3.org/2000/svg" width="400" height="600" viewBox="0 0 400 600">
-              <rect width="100%" height="100%" fill="#2a2a2a"/>
-              <rect x="20" y="20" width="360" height="560" fill="#1a1a1a" stroke="#444" stroke-width="2"/>
-              
-              <rect x="40" y="50" width="150" height="120" fill="#333" stroke="#666" stroke-width="1"/>
-              <rect x="210" y="50" width="150" height="120" fill="#333" stroke="#666" stroke-width="1"/>
-              <rect x="40" y="190" width="150" height="120" fill="#333" stroke="#666" stroke-width="1"/>
-              <rect x="210" y="190" width="150" height="120" fill="#333" stroke="#666" stroke-width="1"/>
-              
-              <rect x="40" y="330" width="320" height="180" fill="#333" stroke="#666" stroke-width="1"/>
-              
-              <rect x="60" y="80" width="80" height="50" fill="#222" stroke="#555" stroke-width="1"/>
-              <text x="100" y="100" text-anchor="middle" fill="#ccc" font-size="8">PC対応</text>
-              <text x="100" y="110" text-anchor="middle" fill="#ccc" font-size="8">✓</text>
-              
-              <rect x="240" y="80" width="40" height="60" fill="#222" stroke="#555" stroke-width="1"/>
-              <text x="260" y="150" text-anchor="middle" fill="#ccc" font-size="8">スマホ対応</text>
-              
-              <rect x="60" y="220" width="70" height="50" fill="#222" stroke="#555" stroke-width="1"/>
-              <text x="95" y="290" text-anchor="middle" fill="#ccc" font-size="8">タブレット対応</text>
-              
-              <text x="285" y="240" text-anchor="middle" fill="white" font-size="10">レスポンシブ</text>
-              <text x="285" y="255" text-anchor="middle" fill="white" font-size="10">デザイン</text>
-              
-              <circle cx="200" cy="420" r="60" fill="#6a6a6a"/>
-              <circle cx="180" cy="400" r="8" fill="white"/>
-              <circle cx="220" cy="400" r="8" fill="white"/>
-              <path d="M 175 420 Q 200 440 225 420" stroke="white" stroke-width="3" fill="none"/>
-              
-              <text x="200" y="500" text-anchor="middle" fill="white" font-size="14">すべてのデバイスで</text>
-              
-              <text x="200" y="550" text-anchor="middle" fill="#666" font-size="12">Page 4 / 5</text>
-            </svg>`,
-            
-            // Page 5
-            `<svg xmlns="http://www.w3.org/2000/svg" width="400" height="600" viewBox="0 0 400 600">
-              <rect width="100%" height="100%" fill="#2a2a2a"/>
-              <rect x="20" y="20" width="360" height="560" fill="#1a1a1a" stroke="#444" stroke-width="2"/>
-              
-              <text x="200" y="100" text-anchor="middle" fill="white" font-size="24" font-weight="bold">完成！</text>
-              
-              <circle cx="200" cy="250" r="80" fill="#6a6a6a"/>
-              <circle cx="170" cy="220" r="10" fill="white"/>
-              <circle cx="230" cy="220" r="10" fill="white"/>
-              <circle cx="165" cy="218" r="4" fill="black"/>
-              <circle cx="235" cy="218" r="4" fill="black"/>
-              <path d="M 160 270 Q 200 300 240 270" stroke="white" stroke-width="4" fill="none"/>
-              
-              <ellipse cx="120" cy="200" rx="15" ry="40" fill="#6a6a6a" transform="rotate(-30 120 200)"/>
-              <ellipse cx="280" cy="200" rx="15" ry="40" fill="#6a6a6a" transform="rotate(30 280 200)"/>
-              
-              <polygon points="100,150 105,165 120,165 108,175 113,190 100,180 87,190 92,175 80,165 95,165" fill="#ffd700"/>
-              <polygon points="300,150 305,165 320,165 308,175 313,190 300,180 287,190 292,175 280,165 295,165" fill="#ffd700"/>
-              <polygon points="150,120 153,128 161,128 155,133 158,141 150,136 142,141 145,133 139,128 147,128" fill="#ffd700"/>
-              <polygon points="250,120 253,128 261,128 255,133 258,141 250,136 242,141 245,133 239,128 247,128" fill="#ffd700"/>
-              
-              <text x="200" y="380" text-anchor="middle" fill="#ccc" font-size="16">ミニマル電子マンガリーダー</text>
-              <text x="200" y="410" text-anchor="middle" fill="#888" font-size="12">React + Vite + react-swipeable</text>
-              
-              <text x="200" y="450" text-anchor="middle" fill="white" font-size="14">シンプル・高速・使いやすい</text>
-              
-              <ellipse cx="200" cy="500" rx="60" ry="20" fill="white" stroke="#333" stroke-width="2"/>
-              <text x="200" y="505" text-anchor="middle" fill="black" font-size="14" font-weight="bold">おしまい</text>
-              
-              <text x="200" y="550" text-anchor="middle" fill="#666" font-size="12">Page 5 / 5</text>
-            </svg>`
-        ];
-
         let currentPage = 0;
-        const totalPages = pages.length;
+        const totalPages = 8;
 
         const mangaPageImg = document.getElementById('mangaPage');
         const pageInfo = document.getElementById('pageInfo');
@@ -316,9 +164,13 @@
         const mangaReader = document.getElementById('mangaReader');
 
         function updatePage() {
-            const svgBlob = new Blob([pages[currentPage]], { type: 'image/svg+xml' });
-            const url = URL.createObjectURL(svgBlob);
-            mangaPageImg.src = url;
+            // 実際のJPG画像を使用
+            mangaPageImg.src = `./public/pages/${currentPage + 1}.jpg`;
+            mangaPageImg.onerror = function() {
+                // 画像が見つからない場合の代替表示
+                this.src = `data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="400" height="600"><rect width="100%" height="100%" fill="%23333"/><text x="50%" y="50%" fill="white" text-anchor="middle" dy=".3em">Page ${currentPage + 1}</text></svg>`;
+            };
+            
             pageInfo.textContent = `${currentPage + 1} / ${totalPages}`;
             
             prevBtn.disabled = currentPage === 0;

@@ -47,7 +47,7 @@ npm run build
 ```
 manga-reader/
 ├── src/App.jsx           # メインコンポーネント
-├── public/pages/         # マンガ画像
+├── public/pages/         # マンガ画像 (8ページのJPG)
 ├── standalone.html       # スタンドアロン版
 └── package.json
 ```
