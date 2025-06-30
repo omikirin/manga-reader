@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>テスト - 画像表示確認</title>
+    <style>
+        body {
+            background-color: #1a1a1a;
+            color: white;
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        img {
+            max-width: 300px;
+            margin: 10px;
+            border: 2px solid #666;
+        }
+        .error {
+            color: red;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>画像パステスト</h1>
+    
+    <h2>テスト1: pages/1.jpg</h2>
+    <img src="pages/1.jpg" alt="Test 1" onerror="this.nextSibling.style.display='block'">
+    <div class="error" style="display:none">❌ pages/1.jpg が読み込めません</div>
+    
+    <h2>テスト2: ./pages/1.jpg</h2>
+    <img src="./pages/1.jpg" alt="Test 2" onerror="this.nextSibling.style.display='block'">
+    <div class="error" style="display:none">❌ ./pages/1.jpg が読み込めません</div>
+    
+    <h2>テスト3: public/pages/1.jpg</h2>
+    <img src="public/pages/1.jpg" alt="Test 3" onerror="this.nextSibling.style.display='block'">
+    <div class="error" style="display:none">❌ public/pages/1.jpg が読み込めません</div>
+    
+    <h2>テスト4: /manga-reader/pages/1.jpg</h2>
+    <img src="/manga-reader/pages/1.jpg" alt="Test 4" onerror="this.nextSibling.style.display='block'">
+    <div class="error" style="display:none">❌ /manga-reader/pages/1.jpg が読み込めません</div>
+
+    <script>
+        console.log('Current URL:', window.location.href);
+        console.log('Base URL:', window.location.origin + window.location.pathname);
+        
+        // 各画像パスをテスト
+        const testPaths = [
+            'pages/1.jpg',
+            './pages/1.jpg', 
+            'public/pages/1.jpg',
+            '/manga-reader/pages/1.jpg'
+        ];
+        
+        testPaths.forEach((path, index) => {
+            const img = new Image();
+            img.onload = () => console.log(`✅ 成功: ${path}`);
+            img.onerror = () => console.log(`❌ 失敗: ${path}`);
+            img.src = path;
+        });
+    </script>
+</body>
+</html>
